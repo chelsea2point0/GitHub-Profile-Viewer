@@ -16,13 +16,19 @@
       <input type="submit" value="Search">
     </form>
 
-    <div>
+    <div ng-show="user">
+      <p>Sort By:
+      <select ng-model="repoSortOrder">
+        <option value="+name">Name</option>
+        <option value="-stargazers_count">Stars</option>
+        <option value="+language">Language</option>
+      </select></p>
+
       <h2>{{user.name}}</h2>
-    	<img ng-src="{{user.avatar_url}}" width="200" title"{{user.name}}">
-    	
+      <img ng-src="{{user.avatar_url}}" width="200" title"{{user.name}}">
     </div>
 
-    <table>
+    <table ng-hide="!user">
       <thead>
         <tr>
           <th>Name</th>
@@ -31,13 +37,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="repo in repos">
+        <tr ng-repeat="repo in repos | orderBy: repoSortOrder">
           <td>{{repo.name}}</td>
           <td>{{repo.stargazers_count | number}}</td>
           <td>{{repo.language}}</td>
         </tr>
       </tbody>
-
     </table>
 
   </body>
