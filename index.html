@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="githubViewer">
+
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+
+  <!--view-->
+  <body ng-controller="MainController"> 
+    <h1>{{message}}</h1>
+    <div> {{error}}</div>
+
+    <form name="searchUser" ng-submit="search(username)">
+      <input type="search" placeholder="Username to find" ng-model="username" required>
+      <input type="submit" value="Search">
+    </form>
+
+    <div>
+      <h2>{{user.name}}</h2>
+    	<img ng-src="{{user.avatar_url}}" width="200" title"{{user.name}}">
+    	
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Stars</th>
+          <th>Language</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="repo in repos">
+          <td>{{repo.name}}</td>
+          <td>{{repo.stargazers_count | number}}</td>
+          <td>{{repo.language}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </body>
+
+</html>
